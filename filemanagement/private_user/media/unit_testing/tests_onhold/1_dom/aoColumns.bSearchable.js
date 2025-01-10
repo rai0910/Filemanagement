@@ -1,9 +1,11 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "aoColumns.bSeachable" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"aaData": gaaData
+	} );
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnTest( 
@@ -17,6 +19,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"aaData": gaaData,
 				"aoColumns": [
 					null,
 					{ "bSearchable": false },
@@ -42,6 +45,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"aaData": gaaData,
 				"aoColumns": [
 					{ "bSearchable": false },
 					{ "bSearchable": false },
