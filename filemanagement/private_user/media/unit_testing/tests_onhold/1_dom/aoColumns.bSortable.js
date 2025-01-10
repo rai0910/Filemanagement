@@ -1,9 +1,11 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "aoColumns.bSortable" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"aaData": gaaData
+	} );
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnTest( 
@@ -17,6 +19,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"aaData": gaaData,
 				"aoColumns": [
 					null,
 					{ "bSortable": false },
@@ -50,6 +53,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"aaData": gaaData,
 				"aoColumns": [
 					null,
 					{ "bSortable": false },
