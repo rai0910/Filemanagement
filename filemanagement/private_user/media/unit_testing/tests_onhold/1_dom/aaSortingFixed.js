@@ -1,9 +1,11 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "aaSortingFixed" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"aaData": gaaData
+	} );
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnTest( 
@@ -20,6 +22,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"aaData": gaaData,
 				"aaSortingFixed": [['0','asc']]
 			} );
 			$('#example thead th:eq(1)').click();
@@ -40,6 +43,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"aaData": gaaData,
 				"aaSortingFixed": [['3','asc']]
 			} );
 			$('#example thead th:eq(1)').click();
