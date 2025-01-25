@@ -1,14 +1,14 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "aaSortingFixed" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"aaData": gaaData
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"No fixed sorting by default",
 		null,
 		function () {
@@ -17,20 +17,23 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Fixed sorting on first column (string/asc) with user sorting on second column (string/asc)",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
-				"aaSortingFixed": [['0','asc']]
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaSortingFixed": [['0','asc']],
+				"fnInitComplete": function () {
+					$('#example thead th:eq(1)').click();
+				}
 			} );
-			$('#example thead th:eq(1)').click();
+			//
 		},
 		function () { return $('#example tbody td:eq(1)').html() == "Camino 1.0"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Fixed sorting on first column (string/asc) with user sorting on second column (string/desc)",
 		function () {
 			$('#example thead th:eq(1)').click();
@@ -38,12 +41,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody td:eq(1)').html() == "Seamonkey 1.1"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Fixed sorting on fourth column (int/asc) with user sorting on second column (string/asc)",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aaSortingFixed": [['3','asc']]
 			} );
 			$('#example thead th:eq(1)').click();
@@ -51,7 +54,7 @@ $(document).ready( function () {
 		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Fixed sorting on fourth column (int/asc) with user sorting on second column (string/desc)",
 		function () {
 			$('#example thead th:eq(1)').click();
